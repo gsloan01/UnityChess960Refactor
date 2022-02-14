@@ -303,26 +303,29 @@ public class BoardManager : MonoBehaviour
         List<int> pieces = new List<int>();
 
         GenerateRandomRooks(out int rook1Pos, out int rook2Pos);
-
+        SpawnChessman(2, rook1Pos, 0, true);
+        SpawnChessman(2, rook2Pos, 0, true);
         pieces.Add(rook1Pos);
         pieces.Add(rook2Pos);
         Debug.Log("W_Rook - " + rook1Pos);
         Debug.Log("W_Rook - " + rook2Pos);
 
         GenerateRandomKing(rook1Pos, rook2Pos, out int kingPos);
-
+        SpawnChessman(0, kingPos, 0, true);
         pieces.Add(kingPos);
         Debug.Log("W_King - " + kingPos);
 
         GenerateRandomBishops(pieces, out int bishop1, out int bishop2);
-
+        SpawnChessman(3, bishop1, 0, true);
+        SpawnChessman(3, bishop2, 0, true);
         pieces.Add(bishop1);
         pieces.Add(bishop2);
         Debug.Log("W_Bishop - " + bishop1);
         Debug.Log("W_Bishop - " + bishop2);
 
         GenerateRandomKnights(pieces, out int knight1, out int knight2);
-
+        SpawnChessman(4, knight1, 0, true);
+        SpawnChessman(4, knight2, 0, true);
         pieces.Add(knight1);
         pieces.Add(knight2);
 
@@ -330,7 +333,7 @@ public class BoardManager : MonoBehaviour
         Debug.Log("W_Knight - " + knight2);
 
         GenerateRandomQueen(pieces, out int queenPos);
-
+        SpawnChessman(1, queenPos, 0, true);
         pieces.Add(queenPos);
 
         Debug.Log("W_Queen - " + queenPos);
@@ -357,7 +360,7 @@ public class BoardManager : MonoBehaviour
     }
 
     //This generates rooks that have at least one space open between them
-    void GenerateRandomRooks(out int rook1Pos, out int rook2Pos)
+    public static void GenerateRandomRooks(out int rook1Pos, out int rook2Pos)
     {
         rook1Pos = 1;
         rook2Pos = 1;
@@ -366,10 +369,9 @@ public class BoardManager : MonoBehaviour
             rook1Pos = UnityEngine.Random.Range(0, 8);
             rook2Pos = UnityEngine.Random.Range(0, 8);
         }
-        SpawnChessman(2, rook1Pos, 0, true);
-        SpawnChessman(2, rook2Pos, 0, true);
+
     }
-    void GenerateRandomKing(int rook1Pos, int rook2Pos, out int kingPos)
+    public static void GenerateRandomKing(int rook1Pos, int rook2Pos, out int kingPos)
     {
         kingPos = -1;
         if (rook1Pos > rook2Pos)
@@ -387,10 +389,10 @@ public class BoardManager : MonoBehaviour
         }
         else
         {
-            SpawnChessman(0, kingPos, 0, true);
+            
         }
     }
-    void GenerateRandomBishops(List<int> pieces, out int bishop1, out int bishop2)
+    public static void GenerateRandomBishops(List<int> pieces, out int bishop1, out int bishop2)
     {
         bishop1 = 1;
         bishop2 = 1;
@@ -401,10 +403,9 @@ public class BoardManager : MonoBehaviour
             bishop2 = UnityEngine.Random.Range(0, 8);
         }
 
-        SpawnChessman(3, bishop1, 0, true);
-        SpawnChessman(3, bishop2, 0, true);
+
     }
-    void GenerateRandomKnights(List<int> pieces, out int knight1, out int knight2)
+    public static void GenerateRandomKnights(List<int> pieces, out int knight1, out int knight2)
     {
         knight1 = -1;
         knight2 = -1;
@@ -415,10 +416,9 @@ public class BoardManager : MonoBehaviour
             knight2 = UnityEngine.Random.Range(0, 8);
         }
 
-        SpawnChessman(4, knight1, 0, true);
-        SpawnChessman(4, knight2, 0, true);
+
     }
-    void GenerateRandomQueen(List<int> pieces, out int queenPos)
+    public static void GenerateRandomQueen(List<int> pieces, out int queenPos)
     {
         queenPos = -1;
         while (queenPos < 0 ||  pieces.Contains(queenPos))
@@ -426,7 +426,7 @@ public class BoardManager : MonoBehaviour
             queenPos = UnityEngine.Random.Range(0, 8);
         }
 
-        SpawnChessman(1, queenPos, 0, true);
+
     }
 
     void PlaceBlack960(List<int> pieces)
